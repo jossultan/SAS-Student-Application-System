@@ -1,0 +1,42 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/sasadmin" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{qualification._id}}">
+    <div class="form-group">
+        <label>Qualification Name</label>
+        <input type="text" class="form-control" name="qualificationName" placeholder="qualification Name" value="{{qualification.qualificationName}}">
+        <div class="text-danger">
+            {{qualification.qualificationNameError}}</div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Minimum Score</label>
+            <input type="text" class="form-control" name="minimumScore" placeholder="minimum Score" value="{{qualification.minimumScore}}">
+            <div class="text-danger">
+            {{qualification.minimumScoreError}}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Maximum Score</label>
+            <input type="text" class="form-control" name="maximumScore" placeholder="maximum Score" value="{{qualification.maximumScore}}">
+            <div class="text-danger">
+            {{qualification.maximumScoreError}}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Result Calculation Description</label>
+        <textarea type="text" class="form-control" name="resultCalcDescription" placeholder="resultCalcDescription" >{{qualification.resultCalcDescription}}</textarea>
+        <div class="text-danger">
+            {{qualification.resultCalcDescriptionError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Grade List</label>
+        <textarea type="text" class="form-control" name="gradeList" placeholder="gradeList">{{qualification.gradeList}}</textarea>
+        <div class="text-danger">
+            {{qualification.gradeListError}}</div>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/sasadmin/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
