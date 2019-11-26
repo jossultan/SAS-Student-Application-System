@@ -1,0 +1,27 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/uniadmin" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{programme._id}}">
+    <div class="form-group">
+        <label>Programme name</label>
+        <input type="text" class="form-control" name="programmeName" placeholder="programme Name" value="{{programme.programmeName}}">
+        <div class="text-danger">
+            {{programme.programmeNameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input type="text" class="form-control" name="closingDate" placeholder="closing Date" value="{{programme.closingDate}}">
+        <div class="text-danger">
+            {{programme.closingDateError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea type="text" class="form-control" name="description" placeholder="description" value="{{programme.description}}"></textarea>
+        <div class="text-danger">
+            {{programme.descriptionError}}</div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/uniadmin/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>

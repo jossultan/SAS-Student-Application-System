@@ -1,0 +1,32 @@
+
+<h3>
+    <a class="btn btn-secondary" href="/uniadmin">Home</a>
+    {{viewTitle}}
+    <a class="btn btn-secondary" href="/uniadmin/addOrEdit" id="add" style="float: right;"><i class="fa fa-plus"></i> Create New</a>
+</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Programme Name</th>
+            <th></th>
+            <th></th>
+            <th>Closing Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.programmeName}}</td>
+            <td></td>
+            <td></td>
+            <td>{{this.closingDate}}</td>
+            <td>
+                <a href="/uniadmin/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/uniadmin/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
