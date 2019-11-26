@@ -5,4 +5,5 @@ mongoose.connect('mongodb://localhost:27017/EmployeeDB', { useNewUrlParser: true
     else { console.log('Error in DB connection : ' + err) }
 });
 
-require('./Programme.model');
+require('./Programme.model')
+require('./qualification.model');

@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 
 const uniAdminController = require('./controllers/uniAdminController');
+const sasAdminController = require('./controllers/sasAdminController');
 
 var app = express();
 app.use(bodyparser.urlencoded({
@@ -21,3 +22,4 @@ app.listen(3000, () => {
 });
 
 app.use('/uniadmin', uniAdminController);
+app.use('/sasadmin', sasAdminController);

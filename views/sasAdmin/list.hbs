@@ -1,0 +1,30 @@
+<h3>
+    <a class="btn btn-secondary" href="/sasadmin">Home</a> Qualification List
+    <a class="btn btn-secondary" href="/sasadmin/addOrEdit" style="float: right;" id="add"><i class="fa fa-plus" ></i> Create New</a>
+</h3>
+    
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Qualification Name</th>
+            <th></th>
+            <th></th>
+            <th>Max Score</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.qualificationName}}</td>
+            <td></td>
+            <td></td>
+            <td>{{this.maximumScore}}</td>
+            <td>
+                <a href="/sasadmin/{{this._id}}" id="{{this.qualificationName}}.update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/sasadmin/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
