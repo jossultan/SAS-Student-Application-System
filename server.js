@@ -30,6 +30,7 @@ app.use(bodyparser.urlencoded({
 }));
 
 app.use(expressValidator());
+
 app.use(session({
     name: SESS_NAME,
     resave: false,

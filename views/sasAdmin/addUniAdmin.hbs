@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/sasadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/sasadmin/list">Maintain Qualifications</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sasadmin/uniList">Add New University</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-6 " style="margin: auto;margin-bottom: 300px;">
+<h3 style="margin-top: 30px;">{{viewTitle}}</h3>
+
+<h2>{{admin.universityName}}</h2>
+
+<form action="/sasadmin/addUniAdmin/{{ID}}" method="POST" autocomplete="off">
+    <div class="form-group">
+        <label>User Name</label>
+        <input type="text" class="form-control" name="userName" placeholder="user name">
+        <div class="text-danger">
+            {{admin.userNameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control" name="password" placeholder="password">
+        <div class="text-danger">
+            {{admin.passwordError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" placeholder="name">
+        <div class="text-danger">
+            {{admin.nameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email" placeholder="email">
+        <div class="text-danger">
+            {{admin.emailError}}</div>
+    </div>
+    <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i> Submit</button>
+</form>
+
+</div>
+
