@@ -11,20 +11,25 @@ const redirectHome = (req, res, next) =>{
     }
     else{
         UniAdmin.findById(req.session.userId, (err, docs)=>{
-            Applicant.findById(req.session.userId, (err, doc)=>{
-                if (req.session.userId == docs._id){
-                    res.redirect('/uniadmin');
-                }
-                else if (req.session.userId == doc._id){
-                    res.redirect('/applicant');
-                }
-                else if (req.session.userId == '5df835e4abf1e03fe83a1b37'){
-                    res.redirect('/sasadmin');
-                }
-                else{
-                    next();
-                }
-            })
+            if(!docs){
+                console.log('Error: ' + err);
+            }
+            else{
+                Applicant.findById(req.session.userId, (err, doc)=>{
+                    if (req.session.userId == docs._id){
+                        res.redirect('/uniadmin');
+                    }
+                    else if (req.session.userId == doc._id){
+                        res.redirect('/applicant');
+                    }
+                    else if (req.session.userId == '5df835e4abf1e03fe83a1b37'){
+                        res.redirect('/sasadmin');
+                    }
+                    else{
+                        next();
+                    }
+                })
+            } 
         })
     }
 }

@@ -47,7 +47,7 @@ router.post('/addUniversity', (req, res) => {
                 });
             }
             else
-                console.log('Error during record insertion : ' + err);
+                console.log('Error : ' + err);
         }
     });
 });
@@ -71,7 +71,7 @@ router.post('/addUniAdmin/:id', (req, res) => {
                 });
             }
             else
-                console.log('Error during record insertion : ' + err);
+                console.log('Error : ' + err);
         }
     });
 });
@@ -91,7 +91,7 @@ router.get('/uniList',redirectLogin ,(req, res) => {
             });
         }
         else {
-            console.log('Error in retrieving qualification list :' + err);
+            console.log('Error :' + err);
         }
     });
 });
@@ -105,7 +105,7 @@ router.get('/list',redirectLogin ,(req, res) => {
             });
         }
         else {
-            console.log('Error in retrieving qualification list :' + err);
+            console.log('Error :' + err);
         }
     });
 });
@@ -119,7 +119,7 @@ router.get('/addOrEdit',redirectLogin ,(req, res) => {
             });
         }
         else {
-            console.log('Error in retrieving qualification list :' + err);
+            console.log('Error :' + err);
         }
     });
 });
@@ -133,7 +133,7 @@ router.get('/addUniAdmin', redirectLogin,(req, res) => {
             });
         }
         else {
-            console.log('Error in retrieving qualification list :' + err);
+            console.log('Error :' + err);
         }
     });
 });
@@ -165,7 +165,7 @@ function insertRecord(req, res) {
                 });
             }
             else
-                console.log('Error during record insertion : ' + err);
+                console.log('Error : ' + err);
         }
     });
 }
@@ -182,7 +182,7 @@ function updateRecord(req, res) {
                 });
             }
             else
-                console.log('Error during record update : ' + err);
+                console.log('Error : ' + err);
         }
     });
 }
@@ -239,7 +239,6 @@ router.get('/addUniAdmin/:id', redirectLogin,(req, res) => {
 });
 
 router.get('/uniAdminList/:id', redirectLogin,(req, res) => {
-    UniAdmin.find
     UniAdmin.find({ universityID: req.params.id }, (err, doc) => {
         if (!err) {
             res.render("sasAdmin/uniAdminList", {
@@ -257,7 +256,7 @@ router.get('/addUniAdmin/delete/:id', redirectLogin,(req, res) => {
         if (!err) {
             res.redirect('/sasAdmin/uniAdminList');
         }
-        else { console.log('Error in qualification delete :' + err); }
+        else { console.log('Error :' + err); }
     });
 });
 
@@ -270,6 +269,7 @@ router.get('/:id',redirectLogin ,(req, res) => {
                 qualification: doc
             });
         }
+        else { console.log('Error :' + err); }
     });
 });
 
@@ -278,7 +278,7 @@ router.get('/delete/:id',redirectLogin ,(req, res) => {
         if (!err) {
             res.redirect('/sasAdmin/list');
         }
-        else { console.log('Error in qualification delete :' + err); }
+        else { console.log('Error :' + err); }
     });
 });
 

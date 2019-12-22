@@ -83,30 +83,39 @@ router.post('/', (req, res) => {
 
 router.get('/review',redirectLogin ,(req, res) => {
     var listProgramme = [];
-    Programme.find({universityID: req.session.universityId},(err, docs) => {
-        Applicantion.find((err, doc)=>{
-            for (var x = 0; x < docs.length; x++){
-                var count = 0;
-                for (var i = 0; i < doc.length; i++){
-                    if (docs[x]._id == doc[i].programmeId){
-                        count++;
-                    }
-                    if (i == (doc.length - 1)){
-                        listProgramme.push({
-                            programmeId: docs[x]._id,
-                            programmeName: docs[x].programmeName,
-                            applicantNumber: count,
-                            closingDate: docs[x].closingDate
-                        });
-                    }
+    Programme.find({universityID: req.session.universityId},(errs, docs) => {
+        if(!docs){
+            console.log('Error:' + errs);
+        }
+        else{
+            Applicantion.find((err, doc)=>{
+                if(!doc){
+                    console.log('Error:' + err);
                 }
-            }
-            res.render("uniadmin/listProgramme", {
-                viewTitle: 'List Programme',
-                list: listProgramme,
-            });
-        })
-            
+                else{
+                    for (var x = 0; x < docs.length; x++){
+                        var count = 0;
+                        for (var i = 0; i < doc.length; i++){
+                            if (docs[x]._id == doc[i].programmeId){
+                                count++;
+                            }
+                            if (i == (doc.length - 1)){
+                                listProgramme.push({
+                                    programmeId: docs[x]._id,
+                                    programmeName: docs[x].programmeName,
+                                    applicantNumber: count,
+                                    closingDate: docs[x].closingDate
+                                });
+                            }
+                        }
+                    }
+                    res.render("uniadmin/listProgramme", {
+                        viewTitle: 'List Programme',
+                        list: listProgramme,
+                    });
+                }
+            })
+        }       
     })
 });
 
@@ -122,28 +131,33 @@ router.get('/listapplicant/:id',redirectLogin , (req, res) => {
                 var id = docs[x]._id;
                 var appDate = docs[x].applicationDate;
                 Applicant.findById(docs[x].userId, (err, doc)=>{
-                    QualificationObtained.findOne({userId: doc._id},(err,docObtain)=>{
-                        Qualification.findById(docObtain.qulificationId,(err,docQua)=>{ 
-                            listProgramme.push({
-                                userId: doc._id,
-                                userName: doc.userName,
-                                statusb: status,
-                                qualificationName: docQua.qualificationName,
-                                overallScore: docObtain.overallScore,
-                                qualificationObtainId : docObtain._id,
-                                applicantionId: id,
-                                applicationDate: appDate,
-                                userId: doc._id,
-                                programmeId: req.params.id,
-                                email: doc.email
-                            });
-                            console.log('Error during record updated : ' + listProgramme.length);
-                            res.render("uniadmin/listapplicant", {
-                                viewTitle: 'List Applicant',
-                                list: listProgramme
+                    if(!doc){
+                        console.log('Error:' + err);
+                    }
+                    else{
+                        QualificationObtained.findOne({userId: doc._id},(err,docObtain)=>{
+                            Qualification.findById(docObtain.qulificationId,(err,docQua)=>{ 
+                                listProgramme.push({
+                                    userId: doc._id,
+                                    userName: doc.userName,
+                                    statusb: status,
+                                    qualificationName: docQua.qualificationName,
+                                    overallScore: docObtain.overallScore,
+                                    qualificationObtainId : docObtain._id,
+                                    applicantionId: id,
+                                    applicationDate: appDate,
+                                    userId: doc._id,
+                                    programmeId: req.params.id,
+                                    email: doc.email
+                                });
+                                console.log('Error during record updated : ' + listProgramme.length);
+                                res.render("uniadmin/listapplicant", {
+                                    viewTitle: 'List Applicant',
+                                    list: listProgramme
+                                });
                             });
                         });
-                    });
+                    }
                 });
             }
         }
@@ -166,32 +180,67 @@ router.post('/detail', (req, res) => {
     })
 
     Result.find({qualificationObtained: req.body.qualificationObtainId},(err,docResult)=>{
-        res.render("uniadmin/detail", {
-            viewTitle: 'Detail Applicant',
-            obj: listProgramme[0],
-            list: docResult
-        });
+        if(!docResult){
+            console.log('Error:' + err);
+        }
+        else{
+            res.render("uniadmin/detail", {
+                viewTitle: 'Detail Applicant',
+                obj: listProgramme[0],
+                list: docResult
+            });
+        }
     }) 
 });
 
 router.post('/review', (req, res) => {
     Applicantion.findOne({_id: req.body.applicantionId},(err,doc)=>{
-        console.log('Error during record insertionc : ' + doc.status);
+        if(!doc){
+            console.log('Error : ' + err);
+        }
+        else{
+            console.log('Error during record insertionc : ' + doc.status);
         
-        Applicantion.update({ _id: req.body.applicantionId }, 
-            {
-                applicationDate : req.body.applicationDate,
-                status : req.body.status,
-                userId : req.body.userId,
-                programmeId : req.body.programmeId
-            }, (err, doc) => {
-            if (!err) { 
-                res.redirect('/uniadmin'); 
-            }
-            else {
-                console.log('Error during record update : ' + err);
-            }
-        });
+            Applicantion.update({ _id: req.body.applicantionId }, 
+                {
+                    applicationDate : req.body.applicationDate,
+                    status : req.body.status,
+                    userId : req.body.userId,
+                    programmeId : req.body.programmeId
+                }, (err, doc) => {
+                if (!err) { 
+                    // this function have purpose to send email 
+                    // var transporter = nodemailer.createTransport({
+                    //     service: 'gmail',
+                    //     auth: {
+                    //       user: 'example@example.com',
+                    //       pass: 'example'
+                    //     }
+                    // });
+                      
+                    // var mailOptions = {
+                    //     from: 'example@example.com',
+                    //     to: req.body.email,
+                    //     subject: "Univesity Submission",
+                    //     text: 'Thank your your submission \n your are \n\n'+ doc.status
+                    //     + '\n\n for more information contant University related'
+                    // };
+                      
+                    // transporter.sendMail(mailOptions, function(error, info){
+                    //     if (error) {
+                    //       console.log(error);
+                    //     } else {
+                    //       console.log('Email sent: ' + info.response);
+                    //     }
+                    // });
+                    res.redirect('/uniadmin'); 
+                }
+                else {
+                    console.log('Error during record update : ' + err);
+                }
+            });
+        }
+        
     });
 });
 
@@ -239,6 +288,7 @@ function updateRecord(req, res) {
 
 
 function handleValidationError(err, body) {
+    
     for (field in err.errors) {
         switch (err.errors[field].path) {
             case 'programmeName':
