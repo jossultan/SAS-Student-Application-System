@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/main">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/main/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/main/register">Register</a>
+      </li>  
+    </ul>
+  </div>  
+</nav>
+
+
+<div class="form-group col-md-6 " style="margin: auto;margin-bottom: 300px;">
+<h3 style="margin-top: 30px;">{{viewTitle}}</h3>
+<form action="/main/register" method="POST" autocomplete="off">
+    <div class="form-group">
+        <label>User Name</label>
+        <input type="text" class="form-control" name="userName" placeholder="user name">
+        <div class="text-danger">
+            {{obj.userNameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control" name="password" placeholder="password">
+        <div class="text-danger">
+            {{obj.passwordError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" placeholder="name">
+        <div class="text-danger">
+            {{obj.nameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email" placeholder="email">
+        <div class="text-danger">
+            {{obj.emailError}}</div>
+    </div>
+
+    <div class="form-group">
+        <label>ID Type</label>
+        <input type="text" class="form-control" name="idType" placeholder="idType">
+        <div class="text-danger">
+            {{obj.idTypeError}}</div>
+    </div>
+    <div class="form-group">
+        <label>ID Number</label>
+        <input type="text" class="form-control" name="idNumber" placeholder="idNumber">
+        <div class="text-danger">
+            {{obj.idNumberError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="text" class="form-control" name="mobileNumber" placeholder="mobileNumber">
+        <div class="text-danger">
+            {{obj.mobileNumberError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Date of Birht</label>
+        <input type="Date" class="form-control" name="dateOfBirth" placeholder="dateOfBirth">
+        <div class="text-danger">
+            {{obj.dateOfBirthError}}</div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Register</button>
+        <a class="btn btn-secondary" href="/main/login"><i class="fa fa-list-alt"></i> Login</a>
+    </div>
+</form>
+
+</div>
+

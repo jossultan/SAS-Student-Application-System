@@ -5,6 +5,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 const session = require('express-session');
+const expressValidator = require('express-validator');
 
 const sasAdminController = require('./controllers/sasAdminController');
 const uniAdminController = require('./controllers/uniAdminController');
@@ -27,6 +28,8 @@ var app = express();
 app.use(bodyparser.urlencoded({
     extended: true
 }));
+
+app.use(expressValidator());
 
 app.use(session({
     name: SESS_NAME,
@@ -67,3 +70,5 @@ app.get('/', (req, res) => {
 
 app.use('/sasadmin', sasAdminController);
 app.use('/uniadmin', uniAdminController);
+app.use('/main', mainController);
+app.use('/applicant', applicantController);

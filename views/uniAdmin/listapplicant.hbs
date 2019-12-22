@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/uniadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/uniadmin/list">Record Programme</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/uniadmin/review">Review Applications</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-8 " style="margin: auto;margin-bottom: 300px;">
+<h3 style="margin-top: 30px;">{{viewTitle}}</h3>
+
+<form action="/uniadmin/detail/" method="POST" autocomplete="off">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Applicant Name</th>
+            <th>Applicant Status</th>
+            <th>Qualification Obtained</th>
+            <th>Score</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.userName}}</td>
+            <input type="hidden" name="_id" value="{{this.userId}}">
+            <input type="hidden" name="userName" value="{{this.userName}}">
+            <td>{{this.statusb}}</td>
+            <input type="hidden" name="statusb" value="{{this.statusb}}">
+            <td>{{this.qualificationName}}</td>
+            <input type="hidden" name="qualificationName" value="{{this.qualificationName}}">
+            <td>{{this.overallScore}}</td>
+            <input type="hidden" name="overallScore" value="{{this.overallScore}}">
+            <input type="hidden" name="qualificationObtainId" value="{{this.qualificationObtainId}}">
+            <input type="hidden" name="applicantionId" value="{{this.applicantionId}}">
+            <input type="hidden" name="applicationDate" value="{{this.applicationDate}}">
+            <input type="hidden" name="userId" value="{{this.userId}}">
+            <input type="hidden" name="programmeId" value="{{this.programmeId}}">
+            <input type="hidden" name="email" value="{{this.email}}">
+            <th><button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i> Review</button></th>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</form>
+
+
+</div>

@@ -10,8 +10,11 @@ const schema = new mongoose.Schema({
         required: 'This field is required.'
     },
     closingDate:{
-        type: String,
+        type: Date,
         required: 'Date must be set.'
+    },
+    universityID:{
+        type: String
     }
 })
 

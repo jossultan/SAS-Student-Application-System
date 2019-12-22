@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/sasadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/list">Record Programme</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/qualification">Record Qualification</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-8 " style="margin: auto;margin-bottom: 300px;">
+<h3 style="margin-top: 30px;">{{viewTitle}}</h3>
+
+<form action="/applicant/result" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{obj._id}}">
+    <input type="hidden" name="qualificationId" value="{{obj.qulificationId}}">
+    <input type="hidden" name="number" value="{{number}}">
+    <div class="form-group">
+        <label>Subject</label>
+        <br>
+        <select name="subjectName">
+            {{#each subjects}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Grade</label>
+        <input type="text" class="form-control" name="grade" placeholder="{{qualification.gradeList}}" >
+    </div>
+    <div class="form-group">
+        <label>Score</label>
+        <input type="text" class="form-control" name="score" placeholder="{{qualification.minimumScore}} - {{qualification.maximumScore}}" >
+        <div class="text-danger">{{errorMassage}}</div>
+    </div>
+    <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Apply</button>
+</form>
+
+<div class="form-group">
+    {{#if success}}
+    <form form action="/applicant/updateQuaObtain" method="POST" autocomplete="off">
+        <input type="hidden" name="id" value="{{obj._id}}">
+        <input type="hidden" name="qualificationId" value="{{obj.qulificationId}}">
+        <input type="hidden" name="number" value="{{number}}">
+        <button type="submit" class="btn btn-info" style="float: right"><i class="fa fa-database"></i> Assign to Qualification</button>
+    </form>
+    {{else}}
+    <p style="float: right; color:red">you need to input {{length}} more data</p>
+    {{/if}}
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.subjectName}}</td>
+            <td>{{this.grades}}</td>
+            <td>{{this.score}}</td>
+            <td>
+                <a href="/sasadmin/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+

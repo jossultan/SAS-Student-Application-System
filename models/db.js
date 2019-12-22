@@ -5,8 +5,13 @@ mongoose.connect('mongodb://localhost:27017/EmployeeDB', { useNewUrlParser: true
     else { console.log('Error in DB connection : ' + err) }
 });
 
+
+require('./Programme.model');
 require('./qualification.model');
 require('./university.model');
 require('./university.admin.model');
+require('./applicant.model');
+require('./application.model');
+require('./result.model')
+require('./qulificationObtained.model');
 
-require('./Programme.model')

@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/sasadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/list">Record Programme</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/qualification">Record Qualification</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-8 " style="margin: auto;margin-bottom: 300px;">
+<h3 style="margin-top: 30px;">{{viewTitle}}</h3>
+
+<form action="/applicant/list" method="POST" autocomplete="off">
+    <div class="form-row">
+        <div class="form-group col-md-9">
+            <input type="text" class="form-control" name="criteria" placeholder="name of the Programme">
+            <div class="text-danger">
+            {{qualification.minimumScoreError}}</div>
+        </div>
+        <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-info" id="submit"><i class="fa fa-database"></i> Find</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Programme Name</th>
+            <th>University Name</th>
+            <th>Closing Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td><a href="/applicant/assign/{{this.programmeId}}">{{this.programmeName}}</a></td>
+            <td>{{this.universityName}}</td>
+            <td>{{this.closingDate}}</td>
+            <td>
+                <a href="/sasadmin/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+
