@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/uniadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/uniadmin/list">Record Programme</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/uniadmin/review">Review Applications</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-8 " style="margin: auto;margin-bottom: 300px;">
+<h2 style="margin-top: 30px;">{{viewTitle}}</h2>
+
+<form action="/uniadmin/review" method="POST" autocomplete="off">
+    <input type="hidden" name='applicantionId' value="{{obj.applicantionId}}"> 
+    <input type="hidden" name='applicationDate' value="{{obj.applicationDate}}"> 
+    <input type="hidden" name='userId' value="{{obj.userId}}"> 
+    <input type="hidden" name='programmeId' value="{{obj.programmeId}}"> 
+    <input type="hidden" name='email' value="{{obj.email}}"> 
+    <div class="form-group">
+        <h5>Applicant Name</h5>
+        <input type="hidden" name='applicantName' value="{{obj.userName}}">
+        <p>{{obj.userName}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Application Status</h5>
+        <input type="hidden" name='applicationStatus' value="{{obj.statusb}}">
+        <p>{{obj.statusb}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Qualification Obtain</h5>
+        <input type="hidden" name='qualificationObtain' value="{{obj.qualificationName}}">
+        <p>{{obj.qualificationName}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Overall Score</h5>
+        <input type="hidden" name='overallScore' value="{{obj.overallScore}}">
+        <p>{{obj.overallScore}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Set Status</h5>
+        <select name="status">
+            <option value="SUCCESSFUL">SUCCESSFUL</option>
+            <option value="UNSUCCESSFUL">UNSUCCESSFUL</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Apply</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th>Grade</th>
+            <th>Score</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.subjectName}}</td>
+            <td>{{this.grades}}</td>
+            <td>{{this.score}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+</div>

@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/sasadmin">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/list">Record Programme</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/applicant/qualification">Record Qualification</a>
+      </li>
+      <li class="nav-item">
+          <form method='post' action='/logout'>
+            <button type="submit" class="btn btn-secondary">Logout</button>
+          </form>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+<div class="form-group col-md-8 " style="margin: auto;margin-bottom: 300px;">
+
+<h2 style="margin-top: 30px;">{{viewTitle}}</h2>
+
+<form action="/applicant/assign" method="POST" autocomplete="off">
+    <div class="form-group">
+        <h5>University Name</h5>
+        <input type="hidden" name='universityName' value="{{obj.universityName}}">
+        <p>{{obj.universityName}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Programme Name</h5>
+        <input type="hidden" name='programmeName' value="{{obj.programmeName}}">
+        <input type="hidden" name='programmeId' value="{{obj.programmeId}}">
+        <p>{{obj.programmeName}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Description</h5>
+        <input type="hidden" name='description' value="{{obj.description}}">
+        <p>{{obj.description}}</p>
+    </div>
+    <div class="form-group">
+        <h5>Closing Date</h5>
+        <input type="hidden" name='closingDate' value="{{obj.closingDate}}">
+        <p>{{obj.closingDate}}</p>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Apply</button>
+    </div>
+</form>
+</div>
+
