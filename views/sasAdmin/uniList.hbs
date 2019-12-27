@@ -34,7 +34,7 @@
     <tbody>
         {{#each list}}
         <tr>
-            <td><a href="/sasadmin/uniAdminList/{{this._id}}">{{this.universityName}}</a></td>
+            <td><a href="/sasadmin/uniAdminList/{{this._id}}" id="{{this.universityName}}">{{this.universityName}}</a></td>
             <td>
                 <a href="/sasadmin/university/{{this._id}}" id="{{this.universityName}}.update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                 <a href="/sasadmin/university/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
